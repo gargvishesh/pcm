@@ -1,0 +1,41 @@
+\chapter{Introduction}
+\label{intro}
+
+\section{Background}
+One of the crucial aspects in database management systems is the speed with which the queries return their results. Traditionally, databases have been disk resident owing to their huge size. A major drawback of such an approach is that the response time of the disk is slow and consequently the response time of the query suffers.The memory hierarchy is designed in order to hide this latency of the disk. However, as the applications are becoming increasingly data-centric, it is becoming more and more difficult to hide this latency\cite{overview}.
+
+\section{Motivation}
+As a result, there has been a lot of research in the computer architecture community for storage alternatives to disk. One family of such storage devices is called Storage Class Memory (SCM). These are non-volatile and dense memory devices which offer speeds comparable to that of memory. Sometime back, HP came up with a type of SCM called \textit{Memristor}\cite{overview}  which relies on resistance to provide data storage capability. 
+
+One of the hotly discussed storage technologies in the class of SCM, over the past few years, has been Phase Change Memory (PCM)\cite{viglas,qureshi,chen}. Infact, in a survey for the most promising storage technologies, PCM was rated as the highest ... More recently, IBM came up with a PCM chip that is 275 times faster than SSD \cite{ibm}
+
+PCM is made up of chalcogenide material which stores data bits by switching between crystalline and amorphous states. As compared to DRAM, PCM is 2X-4X dense. The read latency of PCM is 4X that of DRAM. 
+
+A major drawback that accompanies PCM is in terms of \textit{writes}. A PCM write takes an order of magnitude more time than a read\cite{qureshi}. Similar significant drawbacks are there in terms of energy. Most importantly, the wear out lifetime of PCM is between $10^6$ to $10^8$ writes per cell.
+
+Hence, it is clear that mainstream adoption of PCM requires limiting the writes made by the programs. Typically in a database system, sort, join, and group by form the majority of the workhorse operators. In this work, we propose algorithms for these operators that reduce writes, usually by trading them for reads. Despite this, the running time of the program does not suffer since, as mentioned, there is a huge mismatch between the read and write latencies.
+
+
+Need to follow (Vikram Pudi)
+
+Background
+
+Motivation
+
+\section{Contributions}
+We make the following contributions in this work:
+\begin{itemize}
+\item Propose new PCM conscious algorithms for :
+	\begin{itemize}
+	\item 	group-by
+	\item 	hash-join	
+	\item  sort
+	\end{itemize}	 
+	
+\item Instrument Multi2sim\cite{multi2sim} to include PCM in the memory subsystem in order to get the performance numbers for the proposed algorithms.
+	
+\item Test end to end queries from TPCH benchmark in order to show the improvements from our algorithms.
+
+\end{itemize}
+	
+\section{Organization}

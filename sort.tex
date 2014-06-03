@@ -1,0 +1,28 @@
+\chapter{Sorting}
+\label{sort}
+
+\section{Multi-Pivot Algorithm}
+\cite{abhimanyu} proposed a scheme of sorting called Multi-Pivot Sort. The main idea there is to divide the input array of tuples into partitions that can fit in DRAM by using appropriate number of pivots. Then we scan through the array counting the number of elements between each consecutive pair of pivots. The elements are then shuffled in-place to place them in their right partitions. Each of the partitions are then sorted locally to get to fully sorted array.
+
+In the above sorting scheme, assuming each partition sorting phase finishes within the DRAM without any evictions of the partition elements, the number of tuple writes are expected to be $2n$ - $n$ during in place shuffle and another $n$ once all the sorted partitions get written back to PCM eventually.
+
+%Since each of the partitions fits in the DRAM, no intermediate writes during shuffling are expected to reach PCM. Instead, only the final sorted array causes writes when being evicted from the DRAM.
+\section{Algorithm based on Progression}
+We can bring down the above to $n$ writes with the following scheme of Multi-Pass sorting. The idea is first to scan the array to find the $min$ and $max$ values. The difference between them divided by $n$ gives us the approximate progression per element.
+
+$$progression = (max - min)/n$$
+
+By the DRAM size and the tuple size, we know about how many tuples can fit in DRAM. Let it be $n_c$. The range of values within which each partition tuples belong can be found out by :
+
+$$range = [lowerValue, lowerValue + progression X n_c)$$
+
+Once we get these approximate range boundaries, we make multiple passes through the array focussing on one partition tuples in each pass - bringing them together by means of separate position array and then sorting them.  
+
+The problem with the above algorithms is that the partition sizes need to be really small in order for them to not get evicted while going through the entire input array in each pass. Not only that, we need to keep accessing the already grouped elements repeatedly since otherwise the LRU timestamp would be older than the accessed elements in the array during the scan increasing the likelihood of those getting evicted.
+
+\section{Algorithm based on Merge Sort}
+Another sorting algorithm that is likely to perform well with our model is merge sort. We can divide the input array into DRAM sized partitions and then sort each of those partitions separately in order to cause few writes on PCM. This can be done by means of separate position array so that writes due to tuples shuffling is avoided and there are only integer writes (assuming positions are indicated by integers).
+
+In the merge step, instead of again writing out a 4-byte integer value, we can instead write out the partition from which the next value is to be picked up. In case the number of partitions is less than 256, a 1 byte partition number indicator would suffice. Otherwise we can go with a 2 byte indicator which can cater to $2^{16} = 65536$ different partitions.
+
+During the merge step, it would be very slow to go through the next value from all the partitions each time we have to find the next output element. It would seem that creating a heap for the purpose, containing only the first element from the remaining elements in each partition, would lead to extra writes. However, that will not be the case since the heap elements would be frequently accessed and updated and hence they are likely to not get evicted, thus avoiding a PCM write. 

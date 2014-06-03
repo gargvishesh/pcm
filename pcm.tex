@@ -1,0 +1,27 @@
+\chapter{Phase Change Memory}
+\label{pcm}
+
+Read Phase Change Memory  - Devices to Systems book and insert content here.
+
+\section{PCM Models}
+As shown in Figure \ref{fig:sys_model}, there are currently four alternatives proposed to the current model when incorporating PCM in the memory hierarchy.
+
+In Model (a), PCM replaces the Disk. This model was adopted by \cite{viglas}. However, given the huge database sizes of today, it is unlikely that we would be able to accomodate the entire database on the PCM anytime soon and hence we consider the Disk is indispensable for the time being. 
+
+
+Model (b) corresponds to PCM entirely replacing DRAM. Hence the address space now maps to PCM instead of the DRAM. There is an order of magnitude latency gap between DRAM and PCM and adopting this model would mean incurring PCM latency every time there is a cache miss.
+
+There is an additional DRAM buffer which is in explicit programmer control in model (c). This mode was used by \cite{vamsi}. This would require porting of all the existing applications to the new model in order for them to work efficiently since the current applications, having no knowledge of separate PCM and DRAM address space, would end up only using PCM, which would cause a considerable slowdown. In effect, the system would appear to them as model (a) as discussed previously and would thus have corresponding shortcomings.
+
+\begin{figure}[h!]
+
+\includegraphics[width=14cm]{PCM_Models.png}\centering
+\caption{Candidates for main memory organization with PCM.}
+\label{fig:sys_model}
+\end{figure}
+
+There is a small DRAM as a cache for PCM in Model (d). This was the model recommended by \cite{qureshi}. In this model, the address space of the program maps to PCM and DRAM is managed by the hardware just like a cache. In effect, DRAM can be viewed as another level of cache in the hierarchy. This model would require no modifications for existing applications though they might be inefficient in terms of writes. 
+
+We have adopted model (d) for our algorithms. The key reason is that, of all the models, this model will work the best for existing applications without any redesign or porting    
+
+We also assume a \textit{data-comparison write (DCW)} scheme \cite{write}. In this scheme, while writing back a memory block to PCM during eviction, the memory controller compares the existing PCM block and the newly evicted DRAM block, and writes back only those words which have been modified.

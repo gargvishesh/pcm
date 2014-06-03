@@ -1,0 +1,166 @@
+% This document describes how to use iiscthesis style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentstyle[12pt, booktabs, graphicx]{iiscthes}
+
+\pagestyle{bfheadings}
+
+% Put your macros here
+%\newfont{\punkbx}{punkbx20}
+%\usepackage{booktabs}
+%\usepackage{graphicx}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The frontmatter environment for everything that comes with roman numbering
+\begin{frontmatter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Everything is optional in the front matter.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         THE TITLEPAGE                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Phase Change Memory Conscious Algorithms for Database Operators\\ }
+
+\author{Vishesh Garg}
+% For all the parameters below, take default values
+\submitdate{DECEMBER 2014}
+\dept{Supercomputer Education and Research Centre}
+\enggfaculty
+%\degreein{Computer Systems}
+\mscengg
+\iisclogotrue % Default is false
+% \figurespagefalse %default is true
+\tablespagetrue %default is false
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              COPYRIGHT                             %
+% Copyright is automatically included by the style file              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              DEDICATION                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{dedication}
+% You can design this page as you like
+\begin{center}
+TO \\[2em]
+\large\it Donald Knuth\\
+and\\
+\large\it His Ingenuity 
+\end{center}
+\end{dedication}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         ACKNOWLEDGEMENTS                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\acknowledgements
+
+Many thanks to all the persons who made this style file. It will certainly
+live long! Detailed acknowledgements are available within the style file itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              VITA                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vita
+IISc was born in 1909 and will celebrate its centenary with great fanfare
+in the year 2008.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               PUBLICATIONS BASED ON THIS THESIS                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\publications
+
+\begin{enumerate}
+\item IISc INDEST Committee,  How to Typeset Theses:~Using iiscthesis
+style for \LaTeX, Indian Institute of Science, 2004.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              ABSTRACT                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+\sl
+	This manual tells   you how  to use the  {\tt iiscthes} style to
+produce professional  theses (Ph.D., M.Sc.(Engg)  or  M.E.   reports).
+This style is a modification of the  standard \LaTeX\ report style. 
+This document is written using the {\tt iiscthes} style itself.
+	
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              CONTENTS                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makecontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              KEYWORDS                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\keywords
+{\large\bf{
+LaTeX, thesis, project report, IISc style, style file.
+}}
+
+\vspace{10MM}
+
+\noindent
+Note:~Kindly provide a standard classification for keywords, such as,
+ACM Computing Classification, JEL Classification, AMS Classification etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     NOTATION AND ABBREVIATIONS                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\notations
+	No notation is used in this document. No abbreviations have been
+used either.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{frontmatter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\documentclass[12pt,a4paper,twoside,openright]{report}
+%
+%\includeonly{intro, relWork, gby, hj, sort, exp}
+
+%\begin{document}
+%
+%\title{}
+%\author{Vishesh Garg}
+%\maketitle
+%
+%\pagenumbering{roman}
+%
+%\tableofcontents
+%
+%\pagenumbering{arabic}
+
+\include{intro}
+%
+\include{relWork}
+%
+\include{pcm}
+
+\include{gby}
+%
+\include{hj}
+%
+\include{sort}
+%
+\include{exp}
+
+\include{sim}
+%
+%
+\bibliographystyle{plain}
+\bibliography{main}
+%      
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+\end{document}

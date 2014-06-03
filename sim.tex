@@ -1,0 +1,21 @@
+\chapter{Simulator Modifications}
+\label{sim}
+
+\section{Multi2Sim}
+
+Multi2Sim is an open source application-only cycle-accurate simulator that can simulate superscalar pipelines. It supports simulation of x86 CPU and AMD Evergreen GPU at the ISA level. Recently, it has also added support for ARM and MIPS architectures.
+
+
+\section{Tracking Writes}
+In order to conduct our experiments, we made changes to the Memory Subsystem part of Multi2Sim. We added another level of hierarchy in the form of PCM in the existing setup and DRAM was simulated in a manner similar to one more level of cache.
+
+Since simulators only keep track of only addresses present at various levels of cache, we added support for keeping line-wise track of both the original data residing in PCM when the data got added to cache as well as the current data in memory. This helped us to calculate the number of word writes in a \textit{read-before-write} scheme.
+ 
+
+\section{Timing}
+Similarly, the simulator was modified to support the asymmetric read and write times between reads and writes in a PCM environment.
+
+\section{Wear Levelling}
+We also added wear-distribution measuring capability at the word level in order to calculate the wear-levelling capability of both the current and the new algorithms.
+
+

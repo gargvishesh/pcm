@@ -1,0 +1,26 @@
+\chapter{Group By}
+\label{gby}
+
+Well known techniques for Group By include Sorting and Hashing. 
+
+\paragraph{}
+Sorting ensures ordered groups which might or might not be useful depending on the operators that follow it in the plan tree. The time complexity for Group By through sorting is the same as time complexity of sorting - which is $O(nlogn)$. The average number of swaps for single pivot quick sort algorithm is of the order of $0.3nln(n)$ \cite{swaps}. Since each swap would incur two writes, the total number of writes for this algorithm is $0.6nln(n)$ 
+
+\paragraph{}
+In the Hashing scheme, each tuple is hashed on the Group By column(s) and then put in the corresponding bucket. Tuples in the same bucket are then grouped - either by sorting them individually or performing further rounds of hashing. Apart from record writes, additional writes are incurred in this case due to hash table creation. Assuming $F$ is the fudge factor for each tuple for hash table creation and $n$ is the number of tuples, the total writes for Hash Table creation would be 
+
+$$w(HT) = F \times n \times sizeof(tuple)$$
+\paragraph{}
+We propose an in-place hash-partitioning scheme for Group By. Given a list of records, we divide the total size of the list with the size of the DRAM to come up with a partition count $p$. We then choose a hash function such that it hashes the input group by column values to p distinct hash values. This hash values correspond to p different buckets. The algorithms then proceeds through two phases - (a) partitioning phase and (b) grouping phase
+
+\paragraph{}
+In the partitioning phase, we scan through the entire list keeping track of the number of elements in each hash partition using a separate $p$ element buffer. After the iteration is over, we can determine the starting and ending boundaries of each partition in the same way that we determine the position of each element using a counting buffer in count sort. 
+
+\paragraph{}
+In the grouping phase, we perform an in-place rearrangement of tuples in order to bring "same partition" tuples together, using the boundary information stored in the additional buffer, in a manner similar to cycle-sort. Once all the tuples of a partition come together, we perform quick sort on each partition followed by grouping same value on Group By column(s) elements, similar to Group By using Sorting.
+
+\paragraph{}
+As we can see, this kind of a scheme does away with the overhead of creating a hash table and hence avoids the corresponding writes. Assuming the number of tuples to be $n$, the maximum number of writes possible during the partitioning phase is $sizeof(tuple) \times n$. Since each of the partitions is approximately DRAM sized, the writes due to swaps during sorting each of those partitions is expected to be absorbed in the DRAM itself. As a result, writes happen only when the sorted partition is evicted from the DRAM, causing approximately $partition size$ writes. Adding up the writes after all the partitions have been sorted and grouped, the number of writes would be another $sizeof(tuple) \times n$. Hence the total number of writes for partitioning and grouping phase is $2 \times sizeof(tuple) \times n$
+
+\paragraph{}
+The above scheme though reducing the writes still has a factor of $sizeof(tuple)$ in it. This can be alleviated by using a separate position array. Instead of swapping entire tuples during both partitioning phase and grouping phase, we can shuffle position indicators in the position array instead of the tuples themselves. Assuming integer position array elements, the number of writes would be reduced to $2 \times sizeof(int) \times n$

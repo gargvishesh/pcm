@@ -1,0 +1,23 @@
+\chapter{Related Work}
+\label{relWork}
+\section{Architecture}
+On the architecture side, \cite{qureshi} discussed algorithms for PCM wear levelling. Flip-N-Write proposed storing both a data word and its compliment depending on updating to which one incurred lesser number of writes. Talk about all the 3 ISCA 2009 papers here.  
+
+
+\section{Algorithms}
+There has been similar research for flash devices. \cite{graefe} talks of scan, projection, sort and join operators for a flash based memory hierarchy. Their focus is to speed up these operators by utilizing the fast random access that flash provides. Buffer allocation strategies for join processing on flash devices is discussed in \cite{patel}.
+
+In the context of Phase Change Memory, \cite{chen} proposes PCM conscious algorithms for $B^+$-tree index and hash join. For $B^+$ tree,it recommends keeping keys unsorted at the leaves to avoid writes. For Hash join, virtual partitioning is proposed that partitions the records using their RIDs instead of writing out entire tuples.
+
+ \cite{viglas} proposes write-limited algorithms for sort and join for persistent memory. It considers an architecture where PCM replaces the Hard Disk. Savings in writes are achieved by making multiple passes over data; in other words trading writes for reads. 
+
+\cite{vamsi} discussed about sort algorithm for PCM with explicit control over DRAM. They split the given range into buckets such that each bucket can be sorted using DRAM. The bucket boundaries are determined using hybrid histograms having both depth bound and width bound buckets depending on which limit is hit \textit{later}. The elements are then shuffled to group same bucket elements together followed by sorting each bucket using DRAM. The sorting methodology used is quick sort or count sort based on whether the bucket is depth bound or width bound respectively. A major drawback with this approach is when there is an error in the approximation in the histogram causing DRAM overflow in some of the buckets. This leads to extra writes since the buckets then need to be split. Besides, the construction of a histogram itself has writes of its own.
+
+Prior to this work, \cite{abhimanyu} from our lab proposed algorithms for sort and join for this architecture. Apart from the new Group By operator covered, our work adds certain additional features on top of algorithms for sort and join.
+
+
+
+
+
+
+
