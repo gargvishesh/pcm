@@ -1,0 +1,22 @@
+\chapter{Experiments}
+\label{exp}
+
+Table \ref{table:setup} gives the configuration of the hardware used for the experiments.
+
+We mimicked the operators of Postgres in our own code. We also modified Multi2sim \cite{multi2sim} in order to include Phase Change Memory in the memory hierarchy. We instrumented to code to include the metrics of writes and wear distribution for various algorithms.
+
+We used TPCH 1GB database for our experiments. We ran each query at different selectivity points in order to compare our algorithms with native Postgres algorithms. 
+
+%\begin{table}
+%\caption{Experimental Setup}
+%\label{table:setup}
+%\begin{tabular}{ll}
+%\toprule
+%Machine & SUN Ultra 24 $7.5$ \\
+%Processor & Intel Core 2 Quad Core 3.0 GHz \\
+%OS & Ubuntu 12.04 (Precise Pangolin) (64-bit) \\
+%Memory & 8 GB  \\
+%HD & 3 TB 7200 RPM \\
+%\bottomrule
+%\end{tabular}
+%\end{table}
